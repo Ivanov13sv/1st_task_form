@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Questions from './components/Questions';
+import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Container>
+			<Questions />
+			<Questions />
+			<GlobalStyles />
+		</Container>
+	);
 }
 
 export default App;
+
+const GlobalStyles = createGlobalStyle`
+* {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #3a1075;
+  color: #FFFFFF;
+}
+
+`;
+
+const Container = styled.div`
+	display: flex;
+	align-items: center;
+	/* justify-content: center; */
+	/* flex-direction: column;  */
+	/* margin: 50px 0;
+`;

@@ -4,9 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const json = {
+	"data": [
+		{ "question": "Сколько вам лет?", "id": 1 },
+		{ "question": "Как вас зовут?", "id": 2 },
+		{ "question": "В каком городе вы живете?", "id": 3 },
+		{ "question": "Ваш любимый цвет?", "id": 4 },
+		{ "question": "У вас есть собака?", "id": 5 },
+		{ "question": "Любимая музыка?", "id": 6 }
+	]
+}
+
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );
