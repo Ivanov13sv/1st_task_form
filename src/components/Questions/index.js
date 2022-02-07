@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import styled from 'styled-components';
 import QuizItem from '../QuizItem';
 import MyButton from '../MyButton';
-import { getQuestions } from '../../API/getQuestions';
 import {data} from '../../db.json';
 
 const Questions = () => {
@@ -10,16 +9,14 @@ const Questions = () => {
 	});
 	const [questions, setQuestions] = useState(data);
 
-
 	// useEffect(() => {
 	// 	getQuestions('http://localhost:3000/questions').then((response) => {
 	// 		setQuestions(response.data);
 	// 	});
 	// }, []);
 
-	const test = (question, answer) =>{
+	const getAnswer = (question, answer) =>{
 		setAnswers({...answers, [question]: answer})
-		// console.log(answers)
 	}
 	
 	const setToLocalStorage = (e, obje) =>{ 
@@ -28,7 +25,7 @@ const Questions = () => {
 	}
 
 	const arrQuestions = questions.map((item) => {
-		return <QuizItem key={item.id} item={item}  test={test}/>;
+		return <QuizItem key={item.id} item={item}  getAnswer={getAnswer}/>;
 	});
 
 	return (

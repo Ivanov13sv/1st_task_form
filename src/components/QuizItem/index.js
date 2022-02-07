@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MyInput from '../MyInput';
 
-const Index = ({ item, test }) => {
+const Index = ({ item, getAnswer }) => {
 	const { question} = item;
 
 	const [value, setValue] = useState('');
 
 	useEffect(() => {
-		test(item.question,value);
+		getAnswer(item.question,value);
 		// eslint-disable-next-line
 	}, [value]);
 
