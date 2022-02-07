@@ -5,7 +5,6 @@ function App() {
 	return (
 		<Container>
 			<Questions />
-			<Questions />
 			<GlobalStyles />
 		</Container>
 	);
@@ -32,7 +31,6 @@ body{
 const Container = styled.div`
 	display: flex;
 	align-items: center;
-	/* justify-content: center; */
-	/* flex-direction: column;  */
-	/* margin: 50px 0;
+	justify-content: center;
+	margin: 50px 0 0 0;
 `;

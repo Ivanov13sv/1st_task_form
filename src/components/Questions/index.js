@@ -3,36 +3,38 @@ import styled from 'styled-components';
 import QuizItem from '../QuizItem';
 import MyButton from '../MyButton';
 import { getQuestions } from '../../API/getQuestions';
+import {data} from '../../db.json';
 
 const Questions = () => {
-	const [answers, setAnswers] = useState({});
-	const [questions, setQuestions] = useState([]);
+	const [answers, setAnswers] = useState({
+	});
+	const [questions, setQuestions] = useState(data);
 
-	// const handleObj = (text,answer) =>{
-	// 	const newAnswer = {[text]: answer};
-	// 	setAnswers({...answers, ...newAnswer})
-	// 	console.log(answers)
-	// }
 
-	// const toLocalStorage = (obje) =>{
-	// 	localStorage.setItem('answers', JSON.stringify(obje));
-	// }
+	// useEffect(() => {
+	// 	getQuestions('http://localhost:3000/questions').then((response) => {
+	// 		setQuestions(response.data);
+	// 	});
+	// }, []);
 
-	useEffect(() => {
-		getQuestions('http://localhost:3000/questions').then((response) => {
-			console.log(response.data);
-			setQuestions(response.data);
-		});
-	}, []);
+	const test = (question, answer) =>{
+		setAnswers({...answers, [question]: answer})
+		// console.log(answers)
+	}
+	
+	const setToLocalStorage = (e, obje) =>{ 
+		e.preventDefault();
+		localStorage.setItem('answers', JSON.stringify(obje));
+	}
 
 	const arrQuestions = questions.map((item) => {
-		return <QuizItem key={item.id} text={item.question} />;
+		return <QuizItem key={item.id} item={item}  test={test}/>;
 	});
 
 	return (
 		<Wrapper>
 			<ul>{arrQuestions}</ul>
-			<MyButton>Отправить</MyButton>
+			<MyButton onClick={e => setToLocalStorage(e,answers)}>Отправить</MyButton>
 		</Wrapper>
 	);
 };

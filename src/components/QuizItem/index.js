@@ -2,24 +2,21 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MyInput from '../MyInput';
 
-const Index = ({ text, handleObj }) => {
+const Index = ({ item, test }) => {
+	const { question} = item;
+
 	const [value, setValue] = useState('');
 
-	const handleValue = (e) => {
-		setValue(e.target.value);
-
-	};
-	
-	// useEffect(() =>{
-	// 	handleObj(text, value);
-	// },[value])
-
+	useEffect(() => {
+		test(item.question,value);
+		// eslint-disable-next-line
+	}, [value]);
 
 	return (
 		<QuestionItem>
-			<QuestionTitle>{text}</QuestionTitle>
+			<QuestionTitle>{question}</QuestionTitle>
 			<MyInput
-				onChange={handleValue}
+				onChange={e => setValue(e.target.value)}
 				value={value}
 				placeholder='*Введите текст'
 			/>
