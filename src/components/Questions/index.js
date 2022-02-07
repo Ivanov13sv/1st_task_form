@@ -1,12 +1,13 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import QuizItem from '../QuizItem';
 import MyButton from '../MyButton';
-import {data} from '../../db.json';
+import { data } from '../../db.json';
 
 const Questions = () => {
-	const [answers, setAnswers] = useState({
-	});
+	const [answers, setAnswers] = useState({});
+
+	// eslint-disable-next-line
 	const [questions, setQuestions] = useState(data);
 
 	// useEffect(() => {
@@ -15,23 +16,25 @@ const Questions = () => {
 	// 	});
 	// }, []);
 
-	const getAnswer = (question, answer) =>{
-		setAnswers({...answers, [question]: answer})
-	}
-	
-	const setToLocalStorage = (e, obje) =>{ 
+	const getAnswer = (question, answer) => {
+		setAnswers({ ...answers, [question]: answer });
+	};
+
+	const setToLocalStorage = (e, obje) => {
 		e.preventDefault();
 		localStorage.setItem('answers', JSON.stringify(obje));
-	}
+	};
 
 	const arrQuestions = questions.map((item) => {
-		return <QuizItem key={item.id} item={item}  getAnswer={getAnswer}/>;
+		return <QuizItem key={item.id} item={item} getAnswer={getAnswer} />;
 	});
 
 	return (
 		<Wrapper>
 			<ul>{arrQuestions}</ul>
-			<MyButton onClick={e => setToLocalStorage(e,answers)}>Отправить</MyButton>
+			<MyButton onClick={(e) => setToLocalStorage(e, answers)}>
+				Отправить
+			</MyButton>
 		</Wrapper>
 	);
 };
