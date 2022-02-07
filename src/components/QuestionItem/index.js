@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import MyInput from '../MyInput';
 
 const QuestionItem = ({ item, getAnswer }) => {
-	const { question} = item;
 
 	const [value, setValue] = useState('');
+	const { question } = item;
 
 	useEffect(() => {
-		getAnswer(item.question,value);
+		getAnswer(item.question, value);
 		// eslint-disable-next-line
 	}, [value]);
 
@@ -16,7 +16,7 @@ const QuestionItem = ({ item, getAnswer }) => {
 		<QuestionWrapper>
 			<QuestionTitle>{question}</QuestionTitle>
 			<MyInput
-				onChange={e => setValue(e.target.value)}
+				onChange={(e) => setValue(e.target.value)}
 				value={value}
 				placeholder='*Введите текст'
 			/>

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const index = (props) => {
+const MyInput = (props) => {
 	return <StyledInput {...props} />;
 };
 
-export default index;
+export default MyInput;
 
 const StyledInput = styled.input`
 	border: 1px solid rgba(255, 255, 255, 0.8);
