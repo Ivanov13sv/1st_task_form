@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MyInput from '../MyInput';
 
-const Index = ({ item, getAnswer }) => {
+const QuestionItem = ({ item, getAnswer }) => {
 	const { question} = item;
 
 	const [value, setValue] = useState('');
@@ -13,20 +13,20 @@ const Index = ({ item, getAnswer }) => {
 	}, [value]);
 
 	return (
-		<QuestionItem>
+		<QuestionWrapper>
 			<QuestionTitle>{question}</QuestionTitle>
 			<MyInput
 				onChange={e => setValue(e.target.value)}
 				value={value}
 				placeholder='*Введите текст'
 			/>
-		</QuestionItem>
+		</QuestionWrapper>
 	);
 };
 
-export default Index;
+export default QuestionItem;
 
-const QuestionItem = styled.li`
+const QuestionWrapper = styled.li`
 	width: 338px;
 	margin: 0 0 30px 0;
 	list-style: none;

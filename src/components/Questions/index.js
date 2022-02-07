@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import QuizItem from '../QuizItem';
 import MyButton from '../MyButton';
+import QuestionItem from '../QuestionItem';
 import { data } from '../../db.json';
 
 const Questions = () => {
@@ -10,6 +10,7 @@ const Questions = () => {
 	// eslint-disable-next-line
 	const [questions, setQuestions] = useState(data);
 
+	//getting data with json-server
 	// useEffect(() => {
 	// 	getQuestions('http://localhost:3000/questions').then((response) => {
 	// 		setQuestions(response.data);
@@ -26,7 +27,7 @@ const Questions = () => {
 	};
 
 	const arrQuestions = questions.map((item) => {
-		return <QuizItem key={item.id} item={item} getAnswer={getAnswer} />;
+		return <QuestionItem key={item.id} item={item} getAnswer={getAnswer} />;
 	});
 
 	return (
