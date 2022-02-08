@@ -1,41 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import styled from 'styled-components';
-import MyButton from '../MyButton';
+import Button from '../Button';
 import QuestionItem from '../QuestionItem';
 import { data } from '../../db.json';
 
 const Questions = () => {
-	const [answers, setAnswers] = useState({});
-
 	// eslint-disable-next-line
 	const [questions, setQuestions] = useState(data);
+	const [answers, setAnswers] = useState(
+		questions.map((item) => ({ id: item.id, answer: '' }))
+	);
 
-	//getting data with json-server
-	// useEffect(() => {
-	// 	getQuestions('http://localhost:3000/questions').then((response) => {
-	// 		setQuestions(response.data);
-	// 	});
-	// }, []);
-
-	const getAnswer = (question, answer) => {
-		setAnswers({ ...answers, [question]: answer });
+	const handlerOnChange = (obj) => {
+	
+		const index = answers.findIndex(item => item.id === obj.id);
+		const old = answers[index];
+		const newAnswers = [...answers.slice(0,index), {...old, answer: obj.value}, ...answers.slice(index + 1)]
+		setAnswers(newAnswers)
 	};
 
-	const setToLocalStorage = (e, obje) => {
+	const setToLocalStorage = (e) => {
 		e.preventDefault();
-		localStorage.setItem('answers', JSON.stringify(obje));
+		let results = {};
+
+		for (let i = 0; i < answers.length; i++){
+			const elem = {[questions[i].question]: answers[i].answer};
+			results = {...results, ...elem};
+		}
+
+		localStorage.setItem('answers', JSON.stringify(results));
 	};
 
-	const arrQuestions = questions.map((item) => {
-		return <QuestionItem key={item.id} item={item} getAnswer={getAnswer} />;
+	const arrQuestions = questions.map((item, index) => {
+		return (
+			<QuestionItem
+				key={item.id}
+				item={item}
+				value={answers[index].answer}
+				handlerOnChange={handlerOnChange}
+			/>
+		);
 	});
 
 	return (
-		<Wrapper>
+		<Wrapper onSubmit={(e) => setToLocalStorage(e, answers)}>
 			<ul>{arrQuestions}</ul>
-			<MyButton onClick={(e) => setToLocalStorage(e, answers)}>
-				Отправить
-			</MyButton>
+			<Button>Отправить</Button>
 		</Wrapper>
 	);
 };

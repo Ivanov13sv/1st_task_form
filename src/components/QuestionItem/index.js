@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import MyInput from '../MyInput';
+import Input from '../Input';
 
-const QuestionItem = ({ item, getAnswer }) => {
+const QuestionItem = ({ item,value, handlerOnChange }) => {
 
-	const [value, setValue] = useState('');
-	const { question } = item;
+	const { question, id } = item;
 
-	useEffect(() => {
-		getAnswer(item.question, value);
-		// eslint-disable-next-line
-	}, [value]);
+	const getAnswer = (e) =>{
+		const newAnswer = {id, value: e.target.value};
+		handlerOnChange(newAnswer)
+	}
 
 	return (
 		<QuestionWrapper>
 			<QuestionTitle>{question}</QuestionTitle>
-			<MyInput
-				onChange={(e) => setValue(e.target.value)}
+			<Input
+				onChange={getAnswer}
 				value={value}
 				placeholder='*Введите текст'
 			/>
